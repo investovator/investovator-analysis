@@ -1,4 +1,4 @@
-investovator-core
+investovator-analysis
 =================
 
 Financial analysis module of investovator
