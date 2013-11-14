@@ -7,6 +7,25 @@
     <groupId>org.investovator</groupId>
     <artifactId>investovator-analysis</artifactId>
     <version>0.1</version>
+    <name>investovator - Analysis</name>
 
-    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.investovator</groupId>
+            <artifactId>investovator-core</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ta-lib</groupId>
+            <artifactId>ta-lib</artifactId>
+            <version>0.4.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/ta-lib-0.4.0.jar</systemPath>
+        </dependency>
+    </dependencies>
+
 </project>
