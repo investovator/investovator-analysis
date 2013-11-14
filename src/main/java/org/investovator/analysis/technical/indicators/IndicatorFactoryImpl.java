@@ -18,6 +18,7 @@
 
 package org.investovator.analysis.technical.indicators;
 
+import org.investovator.analysis.exceptions.AnalysisException;
 import org.investovator.analysis.technical.utils.IndicatorType;
 
 /**
@@ -31,7 +32,12 @@ public class IndicatorFactoryImpl implements IndicatorFactory {
      * {@inheritDoc}
      */
     @Override
-    public Indicator createAnalysisIndicator(IndicatorType type) {
-        return null;  //ToDo
+    public Indicator createAnalysisIndicator(IndicatorType type) throws AnalysisException {
+        try {
+            Class indicatorClass = Class.forName(IndicatorType.getClassName(type));
+            return (Indicator) indicatorClass.newInstance();
+        } catch (Exception e) {
+            throw new AnalysisException(e);
+        }
     }
 }

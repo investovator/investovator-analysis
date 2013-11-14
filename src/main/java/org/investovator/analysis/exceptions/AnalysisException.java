@@ -16,23 +16,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.investovator.analysis.technical.indicators;
-
-import org.investovator.analysis.technical.utils.ResultsSet;
+package org.investovator.analysis.exceptions;
 
 /**
  * @author rajith
  * @version ${Revision}
  */
-public class SimpleMovingAverage implements Indicator{
+public class AnalysisException extends Exception {
 
+    public AnalysisException(String msg){
+        super(msg);
+    }
 
-    /**
-     *
-     * {@inheritDoc}
-     */
-    @Override
-    public ResultsSet calculate() {
-        return null;  //ToDo
+    public AnalysisException(Exception e){
+        super(e);
     }
 }

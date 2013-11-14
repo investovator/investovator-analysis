@@ -16,29 +16,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.investovator.analysis.technical.utils;
+package org.investovator.analysis.technical;
+
+import junit.framework.TestCase;
+import org.investovator.analysis.exceptions.AnalysisException;
+import org.investovator.analysis.technical.api.Calculator;
+import org.investovator.analysis.technical.api.CalculatorImpl;
+import org.investovator.analysis.technical.utils.IndicatorType;
 
 /**
  * @author rajith
  * @version ${Revision}
  */
-public enum IndicatorType {
+public class TestSMA extends TestCase {
 
-    SMA,
-    MACD;
-
-    private static final String TIME_SERIES_INDICATORS
-            = "org.investovator.analysis.technical.indicators.timeseries.";
-
-    public static String getClassName(IndicatorType type){
-
-        switch (type) {
-            case SMA:
-                return TIME_SERIES_INDICATORS + "SimpleMovingAverage";
-            case MACD:
-                return TIME_SERIES_INDICATORS + "MovingAverageCD";
-        }
-        return null;
-
+    public void testSMACalculate() throws AnalysisException {
+        Calculator calculator = new CalculatorImpl();
+        calculator.calculateValues(IndicatorType.SMA);
     }
 }

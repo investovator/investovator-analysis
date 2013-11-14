@@ -18,6 +18,7 @@
 
 package org.investovator.analysis.technical.indicators;
 
+import org.investovator.analysis.exceptions.AnalysisException;
 import org.investovator.analysis.technical.utils.IndicatorType;
 
 /**
@@ -31,5 +32,5 @@ public interface IndicatorFactory {
      * @param type type of the indicator ex: SMA, MACD
      * @return {@link Indicator}
      */
-    public Indicator createAnalysisIndicator(IndicatorType type);
+    public Indicator createAnalysisIndicator(IndicatorType type) throws AnalysisException;
 }

@@ -18,6 +18,7 @@
 
 package org.investovator.analysis.technical.api;
 
+import org.investovator.analysis.exceptions.AnalysisException;
 import org.investovator.analysis.technical.indicators.Indicator;
 import org.investovator.analysis.technical.indicators.IndicatorFactory;
 import org.investovator.analysis.technical.indicators.IndicatorFactoryImpl;
@@ -35,7 +36,7 @@ public class CalculatorImpl implements Calculator {
      * {@inheritDoc}
      */
     @Override
-    public ResultsSet calculateValues(IndicatorType type) {
+    public ResultsSet calculateValues(IndicatorType type) throws AnalysisException {
         IndicatorFactory indicatorFactory = new IndicatorFactoryImpl();
         Indicator indicator = indicatorFactory.createAnalysisIndicator(type);
         return indicator.calculate();

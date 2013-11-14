@@ -16,15 +16,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.investovator.analysis.technical.indicators;
+package org.investovator.analysis.technical.indicators.timeseries;
 
+import org.investovator.analysis.technical.indicators.Indicator;
 import org.investovator.analysis.technical.utils.ResultsSet;
 
 /**
  * @author rajith
  * @version ${Revision}
  */
-public class MovingAverageCD implements Indicator{
+public class SimpleMovingAverage implements Indicator {
+
 
     /**
      *

@@ -18,6 +18,7 @@
 
 package org.investovator.analysis.technical.api;
 
+import org.investovator.analysis.exceptions.AnalysisException;
 import org.investovator.analysis.technical.utils.IndicatorType;
 import org.investovator.analysis.technical.utils.ResultsSet;
 
@@ -32,6 +33,6 @@ public interface Calculator {
      * @param type indicator type
      * @return {@link ResultsSet} result set of the calculated values
      */
-    public ResultsSet calculateValues(IndicatorType type);
+    public ResultsSet calculateValues(IndicatorType type) throws AnalysisException;
 
 }
