@@ -18,8 +18,21 @@
 
 package org.investovator.analysis.technical.indicators.timeseries;
 
+import com.tictactec.ta.lib.Core;
+import com.tictactec.ta.lib.MInteger;
+import com.tictactec.ta.lib.RetCode;
+import org.investovator.analysis.exceptions.AnalysisException;
+import org.investovator.analysis.exceptions.InvalidParamException;
 import org.investovator.analysis.technical.indicators.Indicator;
+import org.investovator.analysis.technical.indicators.timeseries.utils.TimeSeriesParams;
+import org.investovator.analysis.technical.utils.Params;
 import org.investovator.analysis.technical.utils.ResultsSet;
+import org.investovator.core.data.api.CompanyStockTransactionsData;
+import org.investovator.core.data.api.CompanyStockTransactionsDataImpl;
+import org.investovator.core.data.api.utils.StockTradingData;
+import org.investovator.core.data.api.utils.TradingDataAttribute;
+
+import java.util.ArrayList;
 
 /**
  * @author rajith
@@ -33,7 +46,37 @@ public class SimpleMovingAverage implements Indicator {
      * {@inheritDoc}
      */
     @Override
-    public ResultsSet calculate() {
-        return null;  //ToDo
+    public ResultsSet calculate(Params parameters) throws InvalidParamException, AnalysisException {
+        TimeSeriesParams timeSeriesParams = (TimeSeriesParams) parameters;
+
+        if(isParametersValid(timeSeriesParams)){
+            CompanyStockTransactionsData transactionsData = new CompanyStockTransactionsDataImpl();
+            ArrayList<TradingDataAttribute> attributes = new ArrayList<TradingDataAttribute >();
+            attributes.add(TradingDataAttribute.CLOSING_PRICE);
+            try {
+                StockTradingData stockTradingData = transactionsData
+                        .getTradingData(CompanyStockTransactionsData.DataType.OHLC,
+                                timeSeriesParams.getStockId(), timeSeriesParams.getStartDate(),
+                                timeSeriesParams.getEndDate(), Integer.MAX_VALUE, attributes);
+
+                double[] closePrice = new double[TOTAL_PERIODS];
+                double[] out = new double[TOTAL_PERIODS];
+                MInteger begin = new MInteger();
+                MInteger length = new MInteger();
+
+                Core core = new Core();
+                RetCode retCode = core.sma()
+                return null;  //ToDo
+            } catch (Exception e) {
+                throw new AnalysisException(e);
+            }
+        } else {
+            throw new InvalidParamException();
+        }
+
+    }
+
+    private boolean isParametersValid(TimeSeriesParams params){
+         return params.getStockId()!=null && params.getStartDate()!=null && params.getEndDate()!=null;
     }
 }

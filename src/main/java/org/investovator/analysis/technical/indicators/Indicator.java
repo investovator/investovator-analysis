@@ -18,6 +18,9 @@
 
 package org.investovator.analysis.technical.indicators;
 
+import org.investovator.analysis.exceptions.AnalysisException;
+import org.investovator.analysis.exceptions.InvalidParamException;
+import org.investovator.analysis.technical.utils.Params;
 import org.investovator.analysis.technical.utils.ResultsSet;
 
 /**
@@ -30,5 +33,5 @@ public interface Indicator {
      *
      * @return {@link ResultsSet}
      */
-    public ResultsSet calculate();
+    public ResultsSet calculate(Params parameters) throws InvalidParamException, AnalysisException;
 }

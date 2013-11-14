@@ -20,9 +20,12 @@ package org.investovator.analysis.technical;
 
 import junit.framework.TestCase;
 import org.investovator.analysis.exceptions.AnalysisException;
-import org.investovator.analysis.technical.api.Calculator;
-import org.investovator.analysis.technical.api.CalculatorImpl;
+import org.investovator.analysis.exceptions.InvalidParamException;
+import org.investovator.analysis.technical.indicators.timeseries.utils.TimeSeriesParams;
 import org.investovator.analysis.technical.utils.IndicatorType;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  * @author rajith
@@ -30,8 +33,16 @@ import org.investovator.analysis.technical.utils.IndicatorType;
  */
 public class TestSMA extends TestCase {
 
-    public void testSMACalculate() throws AnalysisException {
+    private static final String OHLC_DATE_FORMAT = "MM/dd/yyyy";
+
+    public void testSMACalculate() throws AnalysisException, ParseException, InvalidParamException {
         Calculator calculator = new CalculatorImpl();
-        calculator.calculateValues(IndicatorType.SMA);
+        String staringDate = "1/4/2010";
+        String endDate = "12/31/2012";
+        SimpleDateFormat format = new SimpleDateFormat(OHLC_DATE_FORMAT);
+
+        TimeSeriesParams params = new TimeSeriesParams("SAMP", format.parse(staringDate), format.parse(endDate));
+
+        calculator.calculateValues(IndicatorType.SMA, params);
     }
 }

@@ -16,26 +16,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.investovator.analysis.technical.indicators.timeseries;
-
-import org.investovator.analysis.exceptions.AnalysisException;
-import org.investovator.analysis.exceptions.InvalidParamException;
-import org.investovator.analysis.technical.indicators.Indicator;
-import org.investovator.analysis.technical.utils.Params;
-import org.investovator.analysis.technical.utils.ResultsSet;
+package org.investovator.analysis.technical.utils;
 
 /**
  * @author rajith
  * @version ${Revision}
  */
-public class MovingAverageCD implements Indicator {
+public class ParamsImpl implements Params {
 
-    /**
-     *
-     * {@inheritDoc}
-     */
-    @Override
-    public ResultsSet calculate(Params parameters) throws InvalidParamException, AnalysisException {
-        return null;  //ToDo
+    private String stockId;
+
+    public ParamsImpl(String stockId){
+        this.stockId = stockId;
+    }
+
+    public String getStockId() {
+        return stockId;
+    }
+
+    public void setStockId(String stockId) {
+        this.stockId = stockId;
     }
 }

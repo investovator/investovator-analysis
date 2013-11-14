@@ -16,11 +16,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.investovator.analysis.technical.indicators.timeseries;
+package org.investovator.analysis.technical;
 
 import org.investovator.analysis.exceptions.AnalysisException;
 import org.investovator.analysis.exceptions.InvalidParamException;
 import org.investovator.analysis.technical.indicators.Indicator;
+import org.investovator.analysis.technical.indicators.IndicatorFactory;
+import org.investovator.analysis.technical.indicators.IndicatorFactoryImpl;
+import org.investovator.analysis.technical.utils.IndicatorType;
 import org.investovator.analysis.technical.utils.Params;
 import org.investovator.analysis.technical.utils.ResultsSet;
 
@@ -28,14 +31,17 @@ import org.investovator.analysis.technical.utils.ResultsSet;
  * @author rajith
  * @version ${Revision}
  */
-public class MovingAverageCD implements Indicator {
+public class CalculatorImpl implements Calculator {
 
     /**
      *
      * {@inheritDoc}
      */
     @Override
-    public ResultsSet calculate(Params parameters) throws InvalidParamException, AnalysisException {
-        return null;  //ToDo
+    public ResultsSet calculateValues(IndicatorType type, Params parameters)
+            throws AnalysisException, InvalidParamException {
+        IndicatorFactory indicatorFactory = new IndicatorFactoryImpl();
+        Indicator indicator = indicatorFactory.createAnalysisIndicator(type);
+        return indicator.calculate(parameters);
     }
 }
