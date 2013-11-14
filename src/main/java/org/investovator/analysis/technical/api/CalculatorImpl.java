@@ -11,10 +11,16 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package org.investovator.analysis.technical.api;
 
+import org.investovator.analysis.technical.indicators.Indicator;
+import org.investovator.analysis.technical.indicators.IndicatorFactory;
+import org.investovator.analysis.technical.indicators.IndicatorFactoryImpl;
 import org.investovator.analysis.technical.utils.IndicatorType;
 import org.investovator.analysis.technical.utils.ResultsSet;
 
@@ -30,6 +36,8 @@ public class CalculatorImpl implements Calculator {
      */
     @Override
     public ResultsSet calculateValues(IndicatorType type) {
-        return null;  //ToDo
+        IndicatorFactory indicatorFactory = new IndicatorFactoryImpl();
+        Indicator indicator = indicatorFactory.createAnalysisIndicator(type);
+        return indicator.calculate();
     }
 }
