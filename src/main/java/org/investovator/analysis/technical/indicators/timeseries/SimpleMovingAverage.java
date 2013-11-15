@@ -21,16 +21,15 @@ package org.investovator.analysis.technical.indicators.timeseries;
 import com.tictactec.ta.lib.Core;
 import com.tictactec.ta.lib.MInteger;
 import com.tictactec.ta.lib.RetCode;
-import org.apache.commons.lang.ArrayUtils;
 import org.investovator.analysis.exceptions.AnalysisException;
 import org.investovator.analysis.exceptions.InvalidParamException;
 import org.investovator.analysis.technical.indicators.Indicator;
+import org.investovator.analysis.technical.indicators.timeseries.utils.TimeSeriesGraph;
 import org.investovator.analysis.technical.indicators.timeseries.utils.TimeSeriesParams;
+import org.investovator.analysis.technical.indicators.timeseries.utils.TimeSeriesResultSet;
 import org.investovator.analysis.technical.utils.Params;
 import org.investovator.analysis.technical.utils.ResultsSet;
-import org.investovator.core.data.api.CompanyStockTransactionsData;
-import org.investovator.core.data.api.CompanyStockTransactionsDataImpl;
-import org.investovator.core.data.api.utils.StockTradingData;
+import org.investovator.analysis.utils.DataUtils;
 import org.investovator.core.data.api.utils.TradingDataAttribute;
 
 import java.util.ArrayList;
@@ -53,37 +52,31 @@ public class SimpleMovingAverage implements Indicator {
         TimeSeriesParams timeSeriesParams = (TimeSeriesParams) parameters;
 
         if(isParametersValid(timeSeriesParams)){
-            CompanyStockTransactionsData transactionsData = new CompanyStockTransactionsDataImpl();
-            ArrayList<TradingDataAttribute> attributes = new ArrayList<TradingDataAttribute >();
-            attributes.add(TradingDataAttribute.CLOSING_PRICE);
             try {
-                StockTradingData stockTradingData = transactionsData
-                        .getTradingData(CompanyStockTransactionsData.DataType.OHLC,
-                                timeSeriesParams.getStockId(), timeSeriesParams.getStartDate(),
-                                timeSeriesParams.getEndDate(), Integer.MAX_VALUE, attributes);
-
-                HashMap<Date, HashMap<TradingDataAttribute, String>> data = stockTradingData.getTradingData();
-
-                ArrayList<Double> closePrice = new ArrayList<>();
-                double[] out = new double[data.size()];
-
-                for( HashMap<TradingDataAttribute, String> dataEntry : data.values()){
-                    closePrice.add(Double.valueOf(dataEntry.get(TradingDataAttribute.CLOSING_PRICE)));
-                }
+                ArrayList <TradingDataAttribute> attributes = new ArrayList<>();
+                attributes.add(TradingDataAttribute.CLOSING_PRICE);
+                HashMap<Date, HashMap<TradingDataAttribute, String>> data = DataUtils
+                        .getDataValues(timeSeriesParams, attributes);
+                double[] closingPrices = DataUtils.getPriceToDoubles(data);
+                Date[] dates = DataUtils.getDatesToArray(data);
 
                 MInteger begin = new MInteger();
                 MInteger length = new MInteger();
+                double[] out = new double[closingPrices.length];
 
-                double [] closingPrices  = ArrayUtils
-                        .toPrimitive(closePrice.toArray(new Double[closePrice.size()]));
                 Core core = new Core();
-                RetCode retCode = core.sma(0, closePrice.size()-1, closingPrices,
+                RetCode retCode = core.sma(0, (closingPrices.length - 1), closingPrices,
                         timeSeriesParams.getPeriodAverage(), begin, length, out);
 
                 if(retCode == RetCode.Success){
+                    TimeSeriesResultSet resultSet = new TimeSeriesResultSet(timeSeriesParams.getStockId());
 
+                    resultSet.setGraph(TimeSeriesGraph.ORIGINAL, dates, closingPrices, 0, closingPrices.length);
+                    resultSet.setGraph(TimeSeriesGraph.SIMPLE_AVERAGE, dates, out, begin.value, length.value);
+                    return resultSet;
+                } else {
+                    throw new AnalysisException(retCode.toString());
                 }
-                return null;  //ToDo
             } catch (Exception e) {
                 throw new AnalysisException(e);
             }

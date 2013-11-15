@@ -16,21 +16,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.investovator.analysis.technical.utils;
+package org.investovator.analysis.technical.indicators.timeseries.utils;
 
 /**
  * @author rajith
  * @version ${Revision}
  */
-public class ResultsSetImpl implements ResultsSet {
+public enum TimeSeriesGraph {
 
-    private String stockId;
+    ORIGINAL,
 
-    public ResultsSetImpl(String stockId){
-        this.stockId = stockId;
-    }
-
-    public String getStockId(){
-        return stockId;
-    }
+    SIMPLE_AVERAGE
 }
