@@ -21,6 +21,7 @@ package org.investovator.analysis.technical.indicators.timeseries;
 import com.tictactec.ta.lib.Core;
 import com.tictactec.ta.lib.MInteger;
 import com.tictactec.ta.lib.RetCode;
+import org.apache.commons.lang.ArrayUtils;
 import org.investovator.analysis.exceptions.AnalysisException;
 import org.investovator.analysis.exceptions.InvalidParamException;
 import org.investovator.analysis.technical.indicators.Indicator;
@@ -33,6 +34,8 @@ import org.investovator.core.data.api.utils.StockTradingData;
 import org.investovator.core.data.api.utils.TradingDataAttribute;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 
 /**
  * @author rajith
@@ -59,13 +62,27 @@ public class SimpleMovingAverage implements Indicator {
                                 timeSeriesParams.getStockId(), timeSeriesParams.getStartDate(),
                                 timeSeriesParams.getEndDate(), Integer.MAX_VALUE, attributes);
 
-                double[] closePrice = new double[TOTAL_PERIODS];
-                double[] out = new double[TOTAL_PERIODS];
+                HashMap<Date, HashMap<TradingDataAttribute, String>> data = stockTradingData.getTradingData();
+
+                ArrayList<Double> closePrice = new ArrayList<>();
+                double[] out = new double[data.size()];
+
+                for( HashMap<TradingDataAttribute, String> dataEntry : data.values()){
+                    closePrice.add(Double.valueOf(dataEntry.get(TradingDataAttribute.CLOSING_PRICE)));
+                }
+
                 MInteger begin = new MInteger();
                 MInteger length = new MInteger();
 
+                double [] closingPrices  = ArrayUtils
+                        .toPrimitive(closePrice.toArray(new Double[closePrice.size()]));
                 Core core = new Core();
-                RetCode retCode = core.sma()
+                RetCode retCode = core.sma(0, closePrice.size()-1, closingPrices,
+                        timeSeriesParams.getPeriodAverage(), begin, length, out);
+
+                if(retCode == RetCode.Success){
+
+                }
                 return null;  //ToDo
             } catch (Exception e) {
                 throw new AnalysisException(e);
@@ -77,6 +94,7 @@ public class SimpleMovingAverage implements Indicator {
     }
 
     private boolean isParametersValid(TimeSeriesParams params){
-         return params.getStockId()!=null && params.getStartDate()!=null && params.getEndDate()!=null;
+         return params.getStockId()!=null && params.getStartDate()!=null
+                 && params.getEndDate()!=null && params.getEndDate().after(params.getStartDate());
     }
 }
