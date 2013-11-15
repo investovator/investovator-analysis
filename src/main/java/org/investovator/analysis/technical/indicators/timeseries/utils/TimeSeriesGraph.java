@@ -24,7 +24,9 @@ package org.investovator.analysis.technical.indicators.timeseries.utils;
  */
 public enum TimeSeriesGraph {
 
+    /** Default graph*/
     ORIGINAL,
 
+    /** Simple moving average graph*/
     SIMPLE_AVERAGE
 }
