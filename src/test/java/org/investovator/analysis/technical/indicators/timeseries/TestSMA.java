@@ -28,7 +28,6 @@ import org.investovator.analysis.technical.indicators.timeseries.utils.TimeSerie
 import org.investovator.analysis.technical.utils.IndicatorType;
 import org.junit.Test;
 
-import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -42,8 +41,6 @@ import static org.junit.Assert.assertTrue;
 public class TestSMA extends TestIndicator {
 
     private static final String OHLC_DATE_FORMAT = "MM/dd/yyyy";
-    private static String RESOURCE_DIR_PATH = "src" + File.separator + "test" + File.separator
-            + "resources" + File.separator + "core" + File.separator + "artifacts" + File.separator;
 
     @Test
     public void testSMACalculate() throws AnalysisException, ParseException, InvalidParamException {
