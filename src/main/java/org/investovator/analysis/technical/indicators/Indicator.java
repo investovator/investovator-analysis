@@ -30,7 +30,7 @@ import org.investovator.analysis.technical.utils.ResultsSet;
 public interface Indicator {
 
     /**
-     *
+     * @param parameters set the required parameters
      * @return {@link ResultsSet}
      */
     public ResultsSet calculate(Params parameters) throws InvalidParamException, AnalysisException;
