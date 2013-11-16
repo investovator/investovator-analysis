@@ -38,23 +38,31 @@ import static org.junit.Assert.assertTrue;
  * @author rajith
  * @version ${Revision}
  */
-public class TestSMA extends TestIndicator {
+public class TestBBand extends TestIndicator {
 
     @Test
-    public void testSMACalculate() throws AnalysisException, ParseException, InvalidParamException {
+    public void testBBandCalculate() throws AnalysisException, ParseException, InvalidParamException {
         Calculator calculator = new CalculatorImpl();
         String staringDate = "1/4/2010";
         String endDate = "3/30/2010";
         SimpleDateFormat format = new SimpleDateFormat(OHLC_DATE_FORMAT);
 
         TimeSeriesParams params = new TimeSeriesParams("SAMP", format.parse(staringDate), format.parse(endDate));
-        params.setPeriod(5);
+        params.setSlowPeriodAverage(26);
+        params.setQuickPeriodAverage(12);
+        params.setSignalPeriodAverage(9);
+        params.setbBandMAType(TimeSeriesParams.BBandMAType.SMA);
 
-        TimeSeriesResultSet resultSet = (TimeSeriesResultSet) calculator.calculateValues(IndicatorType.SMA, params);
+        TimeSeriesResultSet resultSet = (TimeSeriesResultSet) calculator.calculateValues(IndicatorType.BBAND, params);
         assertTrue(resultSet.containsGraph(TimeSeriesGraph.ORIGINAL));
-        assertTrue(resultSet.containsGraph(TimeSeriesGraph.SMA));
+        assertTrue(resultSet.containsGraph(TimeSeriesGraph.BBAND_UPPER));
+        assertTrue(resultSet.containsGraph(TimeSeriesGraph.BBAND_MIDDLE));
+        assertTrue(resultSet.containsGraph(TimeSeriesGraph.BBAND_LOWER));
 
         String randomDate = "2/15/2010";
-        assertEquals((resultSet.getGraph(TimeSeriesGraph.SMA)).get(format.parse(randomDate)), 218.0);
+        assertEquals((resultSet.getGraph(TimeSeriesGraph.BBAND_UPPER)).get(format.parse(randomDate)), 231.51869084738541);
+        assertEquals((resultSet.getGraph(TimeSeriesGraph.BBAND_MIDDLE)).get(format.parse(randomDate)), 221.0);
+        assertEquals((resultSet.getGraph(TimeSeriesGraph.BBAND_LOWER)).get(format.parse(randomDate)), 210.48130915261459);
     }
+
 }

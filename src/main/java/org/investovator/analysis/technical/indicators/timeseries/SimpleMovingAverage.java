@@ -71,7 +71,7 @@ public class SimpleMovingAverage extends TimeSeriesIndicator {
                     TimeSeriesResultSet resultSet = new TimeSeriesResultSet(timeSeriesParams.getStockId());
 
                     resultSet.setGraph(TimeSeriesGraph.ORIGINAL, dates, closingPrices, 0, closingPrices.length);
-                    resultSet.setGraph(TimeSeriesGraph.SIMPLE_AVERAGE, dates, out, begin.value, length.value);
+                    resultSet.setGraph(TimeSeriesGraph.SMA, dates, out, begin.value, length.value);
                     return resultSet;
                 } else {
                     throw new AnalysisException(retCode.toString());

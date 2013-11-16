@@ -27,7 +27,8 @@ public enum IndicatorType {
     SMA,
     EMA,
     RSI,
-    MACD;
+    MACD,
+    BBAND;
 
     private static final String TIME_SERIES_INDICATORS
             = "org.investovator.analysis.technical.indicators.timeseries.";
@@ -43,6 +44,8 @@ public enum IndicatorType {
                 return TIME_SERIES_INDICATORS + "RelativeStrengthIndex";
             case MACD:
                 return TIME_SERIES_INDICATORS + "MovingAverageCD";
+            case BBAND:
+                return TIME_SERIES_INDICATORS + "BollingerBands";
         }
         return null;
 

@@ -18,10 +18,23 @@
 
 package org.investovator.analysis.technical.indicators.timeseries;
 
+import com.tictactec.ta.lib.Core;
+import com.tictactec.ta.lib.MAType;
+import com.tictactec.ta.lib.MInteger;
+import com.tictactec.ta.lib.RetCode;
 import org.investovator.analysis.exceptions.AnalysisException;
 import org.investovator.analysis.exceptions.InvalidParamException;
+import org.investovator.analysis.technical.indicators.timeseries.utils.TimeSeriesGraph;
+import org.investovator.analysis.technical.indicators.timeseries.utils.TimeSeriesParams;
+import org.investovator.analysis.technical.indicators.timeseries.utils.TimeSeriesResultSet;
 import org.investovator.analysis.technical.utils.Params;
 import org.investovator.analysis.technical.utils.ResultsSet;
+import org.investovator.analysis.utils.DataUtils;
+import org.investovator.core.data.api.utils.TradingDataAttribute;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 
 /**
  * @author rajith
@@ -35,6 +48,49 @@ public class BollingerBands extends TimeSeriesIndicator {
      */
     @Override
     public ResultsSet calculate(Params parameters) throws InvalidParamException, AnalysisException {
-        return null;  //ToDo
+        TimeSeriesParams timeSeriesParams = (TimeSeriesParams) parameters;
+
+        if(isParametersValid(timeSeriesParams)){
+            try {
+                ArrayList<TradingDataAttribute> attributes = new ArrayList<>();
+                attributes.add(TradingDataAttribute.CLOSING_PRICE);
+                HashMap<Date, HashMap<TradingDataAttribute, String>> data = DataUtils
+                        .getDataValues(timeSeriesParams, attributes);
+                double[] closingPrices = DataUtils.getPriceToDoubles(data);
+                Date[] dates = DataUtils.getDatesToArray(data);
+
+                MInteger begin = new MInteger();
+                MInteger length = new MInteger();
+
+                MAType optInMAType = TimeSeriesParams.BBandMAType.valueToTaLib(timeSeriesParams.getbBandMAType());
+                double inDevUp = timeSeriesParams.getDevMultiUp();
+                double inDevDown = timeSeriesParams.getDevMultiDown();
+
+                double[] upperBand= new double[closingPrices.length];
+                double[] middleBand= new double[closingPrices.length];
+                double[] lowerBand= new double[closingPrices.length];
+
+                Core core = new Core();
+                RetCode retCode = core.bbands(0, (closingPrices.length - 1), closingPrices, timeSeriesParams.getPeriod(),
+                        inDevUp, inDevDown, optInMAType,  begin, length, upperBand, middleBand, lowerBand);
+
+                if(retCode == RetCode.Success){
+                    TimeSeriesResultSet resultSet = new TimeSeriesResultSet(timeSeriesParams.getStockId());
+
+                    resultSet.setGraph(TimeSeriesGraph.ORIGINAL, dates, closingPrices, 0, closingPrices.length);
+                    resultSet.setGraph(TimeSeriesGraph.BBAND_UPPER, dates, upperBand, begin.value, length.value);
+                    resultSet.setGraph(TimeSeriesGraph.BBAND_MIDDLE, dates, middleBand, begin.value, length.value);
+                    resultSet.setGraph(TimeSeriesGraph.BBAND_LOWER, dates, lowerBand, begin.value, length.value);
+                    return resultSet;
+                } else {
+                    throw new AnalysisException(retCode.toString());
+                }
+            } catch (Exception e) {
+                throw new AnalysisException(e);
+            }
+        } else {
+            throw new InvalidParamException();
+        }
+
     }
 }

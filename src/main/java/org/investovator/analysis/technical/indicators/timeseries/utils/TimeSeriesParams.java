@@ -18,6 +18,7 @@
 
 package org.investovator.analysis.technical.indicators.timeseries.utils;
 
+import com.tictactec.ta.lib.MAType;
 import org.investovator.analysis.technical.utils.ParamsImpl;
 
 import java.util.Date;
@@ -36,6 +37,10 @@ public class TimeSeriesParams extends ParamsImpl {
     private int quickPeriodAverage;
     private int signalPeriodAverage;
 
+    private BBandMAType bBandMAType;
+    private double devMultiUp;
+    private double devMultiDown;
+
     public TimeSeriesParams (String stockId, Date startDate, Date endDate){
         super(stockId);
         this.startDate = startDate;
@@ -48,6 +53,11 @@ public class TimeSeriesParams extends ParamsImpl {
         this.slowPeriodAverage = 26;
         this.quickPeriodAverage = 12;
         this.signalPeriodAverage = 9;
+
+        /*Default BBand values*/
+        this.bBandMAType = BBandMAType.SMA;
+        this.devMultiUp = 2.0;
+        this.devMultiDown = 2.0;
     }
 
 
@@ -97,5 +107,55 @@ public class TimeSeriesParams extends ParamsImpl {
 
     public void setSignalPeriodAverage(int signalPeriodAverage) {
         this.signalPeriodAverage = signalPeriodAverage;
+    }
+
+    public BBandMAType getbBandMAType() {
+        return bBandMAType;
+    }
+
+    public void setbBandMAType(BBandMAType bBandMAType) {
+        this.bBandMAType = bBandMAType;
+    }
+
+    public double getDevMultiUp() {
+        return devMultiUp;
+    }
+
+    public void setDevMultiUp(double devMultiUp) {
+        this.devMultiUp = devMultiUp;
+    }
+
+    public double getDevMultiDown() {
+        return devMultiDown;
+    }
+
+    public void setDevMultiDown(double devMultiDown) {
+        this.devMultiDown = devMultiDown;
+    }
+
+    public enum BBandMAType {
+        SMA, EMA, KAMA, MAMA, T3, DEMA, TEMA, TRIMA;
+
+        public static MAType valueToTaLib(BBandMAType type){
+            switch (type) {
+                case SMA:
+                    return MAType.Sma;
+                case EMA:
+                    return MAType.Ema;
+                case KAMA:
+                    return MAType.Kama;
+                case MAMA:
+                    return MAType.Mama;
+                case TRIMA:
+                    return MAType.Trima;
+                case T3:
+                    return MAType.T3;
+                case DEMA:
+                    return MAType.Dema;
+                case TEMA:
+                    return MAType.Tema;
+            }
+            return null;
+        }
     }
 }

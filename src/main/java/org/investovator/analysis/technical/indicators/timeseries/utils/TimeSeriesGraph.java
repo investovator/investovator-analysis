@@ -28,7 +28,7 @@ public enum TimeSeriesGraph {
     ORIGINAL,
 
     /** Simple moving average graph*/
-    SIMPLE_AVERAGE,
+    SMA,
 
     /** Exponential moving average graph*/
     EMA,
@@ -39,6 +39,11 @@ public enum TimeSeriesGraph {
     MACD_HIST,
 
     /** Relative strength index*/
-    RSI
+    RSI,
+
+    /** Bollinger bands*/
+    BBAND_UPPER,
+    BBAND_MIDDLE,
+    BBAND_LOWER
 
 }
