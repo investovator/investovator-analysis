@@ -50,6 +50,12 @@ public enum TimeSeriesGraph {
     /** Momentum graph*/
     MOM,
 
+    /**  Chande momentum oscillator graph*/
+    CMO,
+
+    /** Commodity channel index graph*/
+    CCI,
+
     /** Relative strength index graph*/
     RSI,
 

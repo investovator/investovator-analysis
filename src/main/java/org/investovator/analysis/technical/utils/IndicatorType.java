@@ -30,6 +30,8 @@ public enum IndicatorType {
     EMA,
     KAMA,
     RSI,
+    CCI,
+    CMO,
     MOM,
     MACD,
     BBAND;
@@ -50,6 +52,10 @@ public enum IndicatorType {
                 return TIME_SERIES_INDICATORS + "ExponentialMA";
             case RSI:
                 return TIME_SERIES_INDICATORS + "RelativeStrengthIndex";
+            case CCI:
+                return TIME_SERIES_INDICATORS + "CommodityChannelIndex";
+            case CMO:
+                return TIME_SERIES_INDICATORS + "ChandeMomentumOscillator";
             case KAMA:
                 return TIME_SERIES_INDICATORS + "KaufmanAdaptiveMA";
             case MOM:

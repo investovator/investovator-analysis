@@ -38,23 +38,23 @@ import static org.junit.Assert.assertTrue;
  * @author rajith
  * @version ${Revision}
  */
-public class TestRSI extends TestIndicator {
+public class TestCCI extends TestIndicator {
 
     @Test
-    public void testRSICalculate() throws AnalysisException, ParseException, InvalidParamException {
+    public void testCCICalculate() throws AnalysisException, ParseException, InvalidParamException {
         Calculator calculator = new CalculatorImpl();
         String staringDate = "1/4/2010";
         String endDate = "3/30/2010";
         SimpleDateFormat format = new SimpleDateFormat(OHLC_DATE_FORMAT);
 
         TimeSeriesParams params = new TimeSeriesParams("SAMP", format.parse(staringDate), format.parse(endDate));
-        params.setPeriod(14);
+        params.setPeriod(7);
 
-        TimeSeriesResultSet resultSet = (TimeSeriesResultSet) calculator.calculateValues(IndicatorType.RSI, params);
+        TimeSeriesResultSet resultSet = (TimeSeriesResultSet) calculator.calculateValues(IndicatorType.CCI, params);
         assertTrue(resultSet.containsGraph(TimeSeriesGraph.ORIGINAL));
-        assertTrue(resultSet.containsGraph(TimeSeriesGraph.RSI));
+        assertTrue(resultSet.containsGraph(TimeSeriesGraph.CCI));
 
         String randomDate = "2/15/2010";
-        assertEquals((resultSet.getGraph(TimeSeriesGraph.RSI)).get(format.parse(randomDate)), 37.160685883182595);
+        assertEquals((resultSet.getGraph(TimeSeriesGraph.CCI)).get(format.parse(randomDate)), -133.02583025830324);
     }
 }
