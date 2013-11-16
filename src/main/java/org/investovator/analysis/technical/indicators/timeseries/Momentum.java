@@ -69,7 +69,7 @@ public class Momentum extends TimeSeriesIndicator {
                 if(retCode == RetCode.Success){
                     TimeSeriesResultSet resultSet = new TimeSeriesResultSet(timeSeriesParams.getStockId());
 
-                    resultSet.setGraph(TimeSeriesGraph.ORIGINAL, dates, closingPrices, 0, closingPrices.length);
+                    resultSet.setGraph(TimeSeriesGraph.ORIGINAL_CLOSING, dates, closingPrices, 0, closingPrices.length);
                     resultSet.setGraph(TimeSeriesGraph.MOM, dates, out, begin.value, length.value);
                     return resultSet;
                 } else {

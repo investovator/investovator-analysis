@@ -51,7 +51,7 @@ public class TestEMA extends TestIndicator {
         params.setPeriod(5);
 
         TimeSeriesResultSet resultSet = (TimeSeriesResultSet) calculator.calculateValues(IndicatorType.EMA, params);
-        assertTrue(resultSet.containsGraph(TimeSeriesGraph.ORIGINAL));
+        assertTrue(resultSet.containsGraph(TimeSeriesGraph.ORIGINAL_CLOSING));
         assertTrue(resultSet.containsGraph(TimeSeriesGraph.EMA));
 
         String randomDate = "2/15/2010";

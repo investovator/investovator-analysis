@@ -74,7 +74,7 @@ public class MovingAverageCD extends TimeSeriesIndicator {
                 if(retCode == RetCode.Success){
                     TimeSeriesResultSet resultSet = new TimeSeriesResultSet(timeSeriesParams.getStockId());
 
-                    resultSet.setGraph(TimeSeriesGraph.ORIGINAL, dates, closingPrices, 0, closingPrices.length);
+                    resultSet.setGraph(TimeSeriesGraph.ORIGINAL_CLOSING, dates, closingPrices, 0, closingPrices.length);
                     resultSet.setGraph(TimeSeriesGraph.MACD, dates, macd, begin.value, length.value);
                     resultSet.setGraph(TimeSeriesGraph.MACD_SIGNAL, dates, macdSignal, begin.value, length.value);
                     resultSet.setGraph(TimeSeriesGraph.MACD_HIST, dates, macdHist, begin.value, length.value);

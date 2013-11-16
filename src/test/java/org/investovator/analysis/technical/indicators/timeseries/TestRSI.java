@@ -51,7 +51,7 @@ public class TestRSI extends TestIndicator {
         params.setPeriod(14);
 
         TimeSeriesResultSet resultSet = (TimeSeriesResultSet) calculator.calculateValues(IndicatorType.RSI, params);
-        assertTrue(resultSet.containsGraph(TimeSeriesGraph.ORIGINAL));
+        assertTrue(resultSet.containsGraph(TimeSeriesGraph.ORIGINAL_CLOSING));
         assertTrue(resultSet.containsGraph(TimeSeriesGraph.RSI));
 
         String randomDate = "2/15/2010";

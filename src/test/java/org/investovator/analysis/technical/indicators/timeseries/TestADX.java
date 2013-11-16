@@ -51,7 +51,9 @@ public class TestADX extends TestIndicator {
         params.setPeriod(7);
 
         TimeSeriesResultSet resultSet = (TimeSeriesResultSet) calculator.calculateValues(IndicatorType.ADX, params);
-        assertTrue(resultSet.containsGraph(TimeSeriesGraph.ORIGINAL));
+        assertTrue(resultSet.containsGraph(TimeSeriesGraph.ORIGINAL_CLOSING));
+        assertTrue(resultSet.containsGraph(TimeSeriesGraph.ORIGINAL_HIGH));
+        assertTrue(resultSet.containsGraph(TimeSeriesGraph.ORIGINAL_LOW));
         assertTrue(resultSet.containsGraph(TimeSeriesGraph.ADX));
 
         String randomDate = "2/15/2010";

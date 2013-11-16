@@ -77,7 +77,7 @@ public class BollingerBands extends TimeSeriesIndicator {
                 if(retCode == RetCode.Success){
                     TimeSeriesResultSet resultSet = new TimeSeriesResultSet(timeSeriesParams.getStockId());
 
-                    resultSet.setGraph(TimeSeriesGraph.ORIGINAL, dates, closingPrices, 0, closingPrices.length);
+                    resultSet.setGraph(TimeSeriesGraph.ORIGINAL_CLOSING, dates, closingPrices, 0, closingPrices.length);
                     resultSet.setGraph(TimeSeriesGraph.BBAND_UPPER, dates, upperBand, begin.value, length.value);
                     resultSet.setGraph(TimeSeriesGraph.BBAND_MIDDLE, dates, middleBand, begin.value, length.value);
                     resultSet.setGraph(TimeSeriesGraph.BBAND_LOWER, dates, lowerBand, begin.value, length.value);

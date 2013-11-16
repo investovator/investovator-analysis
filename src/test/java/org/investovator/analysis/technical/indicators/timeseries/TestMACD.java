@@ -53,7 +53,7 @@ public class TestMACD extends TestIndicator {
         params.setMACDSignalPeriodAverage(9);
 
         TimeSeriesResultSet resultSet = (TimeSeriesResultSet) calculator.calculateValues(IndicatorType.MACD, params);
-        assertTrue(resultSet.containsGraph(TimeSeriesGraph.ORIGINAL));
+        assertTrue(resultSet.containsGraph(TimeSeriesGraph.ORIGINAL_CLOSING));
         assertTrue(resultSet.containsGraph(TimeSeriesGraph.MACD));
         assertTrue(resultSet.containsGraph(TimeSeriesGraph.MACD_SIGNAL));
         assertTrue(resultSet.containsGraph(TimeSeriesGraph.MACD_HIST));

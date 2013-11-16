@@ -51,7 +51,7 @@ public class TestCMO extends TestIndicator {
         params.setPeriod(7);
 
         TimeSeriesResultSet resultSet = (TimeSeriesResultSet) calculator.calculateValues(IndicatorType.CMO, params);
-        assertTrue(resultSet.containsGraph(TimeSeriesGraph.ORIGINAL));
+        assertTrue(resultSet.containsGraph(TimeSeriesGraph.ORIGINAL_CLOSING));
         assertTrue(resultSet.containsGraph(TimeSeriesGraph.CMO));
 
         String randomDate = "2/15/2010";

@@ -54,7 +54,7 @@ public class TestBBand extends TestIndicator {
         params.setbBandMAType(TimeSeriesParams.BBandMAType.SMA);
 
         TimeSeriesResultSet resultSet = (TimeSeriesResultSet) calculator.calculateValues(IndicatorType.BBAND, params);
-        assertTrue(resultSet.containsGraph(TimeSeriesGraph.ORIGINAL));
+        assertTrue(resultSet.containsGraph(TimeSeriesGraph.ORIGINAL_CLOSING));
         assertTrue(resultSet.containsGraph(TimeSeriesGraph.BBAND_UPPER));
         assertTrue(resultSet.containsGraph(TimeSeriesGraph.BBAND_MIDDLE));
         assertTrue(resultSet.containsGraph(TimeSeriesGraph.BBAND_LOWER));

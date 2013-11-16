@@ -74,7 +74,9 @@ public class DirectionalMovIndex extends TimeSeriesIndicator {
                 if(retCode == RetCode.Success){
                     TimeSeriesResultSet resultSet = new TimeSeriesResultSet(timeSeriesParams.getStockId());
 
-                    resultSet.setGraph(TimeSeriesGraph.ORIGINAL, dates, closingPrices, 0, closingPrices.length);
+                    resultSet.setGraph(TimeSeriesGraph.ORIGINAL_CLOSING, dates, closingPrices, 0, closingPrices.length);
+                    resultSet.setGraph(TimeSeriesGraph.ORIGINAL_HIGH, dates, highPrices, 0, highPrices.length);
+                    resultSet.setGraph(TimeSeriesGraph.ORIGINAL_LOW, dates, lowPrices, 0, lowPrices.length);
                     resultSet.setGraph(TimeSeriesGraph.DX, dates, out, begin.value, length.value);
                     return resultSet;
                 } else {

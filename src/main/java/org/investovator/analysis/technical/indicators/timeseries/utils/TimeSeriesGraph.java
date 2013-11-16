@@ -25,7 +25,9 @@ package org.investovator.analysis.technical.indicators.timeseries.utils;
 public enum TimeSeriesGraph {
 
     /** Default graph*/
-    ORIGINAL,
+    ORIGINAL_CLOSING,
+    ORIGINAL_HIGH,
+    ORIGINAL_LOW,
 
     /** Average directional index graph*/
     DX,
