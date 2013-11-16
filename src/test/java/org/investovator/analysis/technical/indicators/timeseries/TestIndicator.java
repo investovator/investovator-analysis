@@ -38,8 +38,8 @@ import java.io.IOException;
  */
 public class TestIndicator {
 
-    private static final String OHLC_DATE_FORMAT = "MM/dd/yyyy";
-    private static String RESOURCE_DIR_PATH = "src" + File.separator + "test" + File.separator
+    protected static final String OHLC_DATE_FORMAT = "MM/dd/yyyy";
+    protected static String RESOURCE_DIR_PATH = "src" + File.separator + "test" + File.separator
             + "resources" + File.separator + "core" + File.separator + "artifacts" + File.separator;
 
     @Before

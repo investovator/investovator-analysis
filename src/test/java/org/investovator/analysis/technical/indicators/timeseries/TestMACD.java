@@ -38,23 +38,28 @@ import static org.junit.Assert.assertTrue;
  * @author rajith
  * @version ${Revision}
  */
-public class TestSMA extends TestIndicator {
+public class TestMACD extends TestIndicator {
 
     @Test
-    public void testSMACalculate() throws AnalysisException, ParseException, InvalidParamException {
+    public void testMACDCalculate() throws AnalysisException, ParseException, InvalidParamException {
         Calculator calculator = new CalculatorImpl();
         String staringDate = "1/4/2010";
         String endDate = "3/30/2010";
         SimpleDateFormat format = new SimpleDateFormat(OHLC_DATE_FORMAT);
 
         TimeSeriesParams params = new TimeSeriesParams("SAMP", format.parse(staringDate), format.parse(endDate));
-        params.setPeriodAverage(5);
+        params.setSlowPeriodAverage(26);
+        params.setQuickPeriodAverage(12);
+        params.setSignalPeriodAverage(9);
 
-        TimeSeriesResultSet resultSet = (TimeSeriesResultSet) calculator.calculateValues(IndicatorType.SMA, params);
+        TimeSeriesResultSet resultSet = (TimeSeriesResultSet) calculator.calculateValues(IndicatorType.MACD, params);
         assertTrue(resultSet.containsGraph(TimeSeriesGraph.ORIGINAL));
-        assertTrue(resultSet.containsGraph(TimeSeriesGraph.SIMPLE_AVERAGE));
+        assertTrue(resultSet.containsGraph(TimeSeriesGraph.MACD));
+        assertTrue(resultSet.containsGraph(TimeSeriesGraph.MACD_SIGNAL));
+        assertTrue(resultSet.containsGraph(TimeSeriesGraph.MACD_HIST));
 
-        String randomDate = "2/15/2010";
-        assertEquals((resultSet.getGraph(TimeSeriesGraph.SIMPLE_AVERAGE)).get(format.parse(randomDate)), 218.0);
+        String randomDate = "3/30/2010";
+        assertEquals((resultSet.getGraph(TimeSeriesGraph.MACD_HIST)).get(format.parse(randomDate)), -1.5162192513042534);
     }
+
 }

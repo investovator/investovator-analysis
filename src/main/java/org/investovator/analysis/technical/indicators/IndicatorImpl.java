@@ -16,23 +16,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.investovator.analysis.technical.indicators.timeseries.utils;
+package org.investovator.analysis.technical.indicators;
+
+import org.investovator.analysis.technical.indicators.timeseries.utils.TimeSeriesParams;
 
 /**
  * @author rajith
  * @version ${Revision}
  */
-public enum TimeSeriesGraph {
+public abstract class IndicatorImpl implements Indicator {
 
-    /** Default graph*/
-    ORIGINAL,
-
-    /** Simple moving average graph*/
-    SIMPLE_AVERAGE,
-
-    /** Moving average convergence divergence graphs*/
-    MACD,
-    MACD_SIGNAL,
-    MACD_HIST
-
+    protected boolean isParametersValid(TimeSeriesParams params) {
+        return params.getStockId()!=null && params.getStartDate()!=null
+                && params.getEndDate()!=null && params.getEndDate().after(params.getStartDate());
+    }
 }

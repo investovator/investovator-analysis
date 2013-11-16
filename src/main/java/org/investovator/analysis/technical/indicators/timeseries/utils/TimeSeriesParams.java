@@ -32,11 +32,22 @@ public class TimeSeriesParams extends ParamsImpl {
     private Date endDate;
     private int periodAverage;
 
+    private int slowPeriodAverage;
+    private int quickPeriodAverage;
+    private int signalPeriodAverage;
+
     public TimeSeriesParams (String stockId, Date startDate, Date endDate){
         super(stockId);
         this.startDate = startDate;
         this.endDate = endDate;
+
+        /*SMA default value*/
         this.periodAverage = 30;
+
+        /*MACD default values*/
+        this.slowPeriodAverage = 26;
+        this.quickPeriodAverage = 12;
+        this.signalPeriodAverage = 9;
     }
 
 
@@ -62,5 +73,29 @@ public class TimeSeriesParams extends ParamsImpl {
 
     public void setPeriodAverage(int periodAverage) {
         this.periodAverage = periodAverage;
+    }
+
+    public int getSlowPeriodAverage() {
+        return slowPeriodAverage;
+    }
+
+    public void setSlowPeriodAverage(int slowPeriodAverage) {
+        this.slowPeriodAverage = slowPeriodAverage;
+    }
+
+    public int getQuickPeriodAverage() {
+        return quickPeriodAverage;
+    }
+
+    public void setQuickPeriodAverage(int quickPeriodAverage) {
+        this.quickPeriodAverage = quickPeriodAverage;
+    }
+
+    public int getSignalPeriodAverage() {
+        return signalPeriodAverage;
+    }
+
+    public void setSignalPeriodAverage(int signalPeriodAverage) {
+        this.signalPeriodAverage = signalPeriodAverage;
     }
 }

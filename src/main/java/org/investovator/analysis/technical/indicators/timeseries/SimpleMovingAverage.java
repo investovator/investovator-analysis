@@ -23,7 +23,7 @@ import com.tictactec.ta.lib.MInteger;
 import com.tictactec.ta.lib.RetCode;
 import org.investovator.analysis.exceptions.AnalysisException;
 import org.investovator.analysis.exceptions.InvalidParamException;
-import org.investovator.analysis.technical.indicators.Indicator;
+import org.investovator.analysis.technical.indicators.IndicatorImpl;
 import org.investovator.analysis.technical.indicators.timeseries.utils.TimeSeriesGraph;
 import org.investovator.analysis.technical.indicators.timeseries.utils.TimeSeriesParams;
 import org.investovator.analysis.technical.indicators.timeseries.utils.TimeSeriesResultSet;
@@ -40,7 +40,7 @@ import java.util.HashMap;
  * @author rajith
  * @version ${Revision}
  */
-public class SimpleMovingAverage implements Indicator {
+public class SimpleMovingAverage extends IndicatorImpl {
 
 
     /**
@@ -86,8 +86,4 @@ public class SimpleMovingAverage implements Indicator {
 
     }
 
-    private boolean isParametersValid(TimeSeriesParams params){
-         return params.getStockId()!=null && params.getStartDate()!=null
-                 && params.getEndDate()!=null && params.getEndDate().after(params.getStartDate());
-    }
 }
