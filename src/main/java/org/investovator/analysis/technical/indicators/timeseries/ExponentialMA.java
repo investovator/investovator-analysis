@@ -41,6 +41,10 @@ import java.util.HashMap;
  */
 public class ExponentialMA extends TimeSeriesIndicator {
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public ResultsSet calculate(Params parameters) throws InvalidParamException, AnalysisException {
         TimeSeriesParams timeSeriesParams = (TimeSeriesParams) parameters;

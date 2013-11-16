@@ -29,6 +29,10 @@ import org.investovator.analysis.technical.utils.ResultsSet;
  */
 public class RelativeStrengthIndex extends TimeSeriesIndicator {
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public ResultsSet calculate(Params parameters) throws InvalidParamException, AnalysisException {
         return null;  //ToDo
