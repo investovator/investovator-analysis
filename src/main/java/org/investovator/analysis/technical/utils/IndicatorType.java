@@ -28,6 +28,7 @@ public enum IndicatorType {
     SMA,
     EMA,
     RSI,
+    MOM,
     MACD,
     BBAND;
 
@@ -45,6 +46,8 @@ public enum IndicatorType {
                 return TIME_SERIES_INDICATORS + "ExponentialMA";
             case RSI:
                 return TIME_SERIES_INDICATORS + "RelativeStrengthIndex";
+            case MOM:
+                return TIME_SERIES_INDICATORS + "Momentum";
             case MACD:
                 return TIME_SERIES_INDICATORS + "MovingAverageCD";
             case BBAND:

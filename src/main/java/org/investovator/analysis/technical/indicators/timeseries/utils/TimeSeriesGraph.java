@@ -27,7 +27,7 @@ public enum TimeSeriesGraph {
     /** Default graph*/
     ORIGINAL,
 
-    /** Average directional index*/
+    /** Average directional index graph*/
     ADX,
 
     /** Simple moving average graph*/
@@ -41,7 +41,10 @@ public enum TimeSeriesGraph {
     MACD_SIGNAL,
     MACD_HIST,
 
-    /** Relative strength index*/
+    /** Momentum graph*/
+    MOM,
+
+    /** Relative strength index graph*/
     RSI,
 
     /** Bollinger bands*/

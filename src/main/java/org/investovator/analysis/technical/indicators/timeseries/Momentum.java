@@ -39,7 +39,7 @@ import java.util.HashMap;
  * @author rajith
  * @version ${Revision}
  */
-public class SimpleMovingAverage extends TimeSeriesIndicator {
+public class Momentum extends TimeSeriesIndicator {
 
     /**
      *
@@ -51,7 +51,7 @@ public class SimpleMovingAverage extends TimeSeriesIndicator {
 
         if(isParametersValid(timeSeriesParams)){
             try {
-                ArrayList <TradingDataAttribute> attributes = new ArrayList<>();
+                ArrayList<TradingDataAttribute> attributes = new ArrayList<>();
                 attributes.add(TradingDataAttribute.CLOSING_PRICE);
                 HashMap<Date, HashMap<TradingDataAttribute, String>> data = DataUtils
                         .getDataValues(timeSeriesParams, attributes);
@@ -63,14 +63,14 @@ public class SimpleMovingAverage extends TimeSeriesIndicator {
                 double[] out = new double[closingPrices.length];
 
                 Core core = new Core();
-                RetCode retCode = core.sma(0, (closingPrices.length - 1), closingPrices, timeSeriesParams.getPeriod(),
+                RetCode retCode = core.mom(0, (closingPrices.length - 1), closingPrices, timeSeriesParams.getPeriod(),
                         begin, length, out);
 
                 if(retCode == RetCode.Success){
                     TimeSeriesResultSet resultSet = new TimeSeriesResultSet(timeSeriesParams.getStockId());
 
                     resultSet.setGraph(TimeSeriesGraph.ORIGINAL, dates, closingPrices, 0, closingPrices.length);
-                    resultSet.setGraph(TimeSeriesGraph.SMA, dates, out, begin.value, length.value);
+                    resultSet.setGraph(TimeSeriesGraph.MOM, dates, out, begin.value, length.value);
                     return resultSet;
                 } else {
                     throw new AnalysisException(retCode.toString());
