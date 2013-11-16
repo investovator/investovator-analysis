@@ -56,7 +56,7 @@ public class BollingerBands extends TimeSeriesIndicator {
                 attributes.add(TradingDataAttribute.CLOSING_PRICE);
                 HashMap<Date, HashMap<TradingDataAttribute, String>> data = DataUtils
                         .getDataValues(timeSeriesParams, attributes);
-                double[] closingPrices = DataUtils.getPriceToDoubles(data);
+                double[] closingPrices = DataUtils.getPriceToDoubles(data, TradingDataAttribute.CLOSING_PRICE);
                 Date[] dates = DataUtils.getDatesToArray(data);
 
                 MInteger begin = new MInteger();

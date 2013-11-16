@@ -39,7 +39,7 @@ import java.util.HashMap;
  * @author rajith
  * @version ${Revision}
  */
-public class MovingAverageCD extends TimeSeriesIndicator {
+public class ADirectionalMovement extends TimeSeriesIndicator {
 
     /**
      *
@@ -47,37 +47,35 @@ public class MovingAverageCD extends TimeSeriesIndicator {
      */
     @Override
     public ResultsSet calculate(Params parameters) throws InvalidParamException, AnalysisException {
-
         TimeSeriesParams timeSeriesParams = (TimeSeriesParams) parameters;
 
         if(isParametersValid(timeSeriesParams)){
             try {
                 ArrayList<TradingDataAttribute> attributes = new ArrayList<>();
                 attributes.add(TradingDataAttribute.CLOSING_PRICE);
+                attributes.add(TradingDataAttribute.HIGH_PRICE);
+                attributes.add(TradingDataAttribute.LOW_PRICE);
                 HashMap<Date, HashMap<TradingDataAttribute, String>> data = DataUtils
                         .getDataValues(timeSeriesParams, attributes);
                 double[] closingPrices = DataUtils.getPriceToDoubles(data, TradingDataAttribute.CLOSING_PRICE);
+                double[] highPrices = DataUtils.getPriceToDoubles(data, TradingDataAttribute.HIGH_PRICE);
+                double[] lowPrices = DataUtils.getPriceToDoubles(data, TradingDataAttribute.LOW_PRICE);
+
                 Date[] dates = DataUtils.getDatesToArray(data);
 
                 MInteger begin = new MInteger();
                 MInteger length = new MInteger();
-
-                double[] macd= new double[closingPrices.length];
-                double[] macdSignal= new double[closingPrices.length];
-                double[] macdHist= new double[closingPrices.length];
+                double[] out = new double[closingPrices.length];
 
                 Core core = new Core();
-                RetCode retCode = core.macd(0, (closingPrices.length - 1), closingPrices,
-                        timeSeriesParams.getMACDQuickPeriodAverage(), timeSeriesParams.getMACDSlowPeriodAverage(),
-                        timeSeriesParams.getMACDSignalPeriodAverage(), begin, length, macd, macdSignal, macdHist);
+                RetCode retCode = core.adx(0, (closingPrices.length - 1),highPrices, lowPrices, closingPrices,
+                        timeSeriesParams.getPeriod(), begin, length, out);
 
                 if(retCode == RetCode.Success){
                     TimeSeriesResultSet resultSet = new TimeSeriesResultSet(timeSeriesParams.getStockId());
 
                     resultSet.setGraph(TimeSeriesGraph.ORIGINAL, dates, closingPrices, 0, closingPrices.length);
-                    resultSet.setGraph(TimeSeriesGraph.MACD, dates, macd, begin.value, length.value);
-                    resultSet.setGraph(TimeSeriesGraph.MACD_SIGNAL, dates, macdSignal, begin.value, length.value);
-                    resultSet.setGraph(TimeSeriesGraph.MACD_HIST, dates, macdHist, begin.value, length.value);
+                    resultSet.setGraph(TimeSeriesGraph.ADX, dates, out, begin.value, length.value);
                     return resultSet;
                 } else {
                     throw new AnalysisException(retCode.toString());

@@ -49,10 +49,11 @@ public class DataUtils {
         return stockTradingData.getTradingData();
     }
 
-    public static double [] getPriceToDoubles(HashMap<Date, HashMap<TradingDataAttribute, String>> data){
+    public static double [] getPriceToDoubles(HashMap<Date, HashMap<TradingDataAttribute, String>> data,
+                                              TradingDataAttribute attribute){
         ArrayList<Double> closePrice = new ArrayList<>();
         for(HashMap<TradingDataAttribute, String> dataEntry : data.values()){
-            closePrice.add(Double.valueOf(dataEntry.get(TradingDataAttribute.CLOSING_PRICE)));
+            closePrice.add(Double.valueOf(dataEntry.get(attribute)));
         }
 
         return ArrayUtils.toPrimitive(closePrice.toArray(new Double[closePrice.size()]));
