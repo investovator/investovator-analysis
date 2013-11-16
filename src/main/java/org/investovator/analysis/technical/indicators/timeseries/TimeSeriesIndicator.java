@@ -16,15 +16,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.investovator.analysis.technical.indicators;
+package org.investovator.analysis.technical.indicators.timeseries;
 
+import org.investovator.analysis.technical.indicators.Indicator;
 import org.investovator.analysis.technical.indicators.timeseries.utils.TimeSeriesParams;
 
 /**
  * @author rajith
  * @version ${Revision}
  */
-public abstract class IndicatorImpl implements Indicator {
+public abstract class TimeSeriesIndicator implements Indicator {
 
     protected boolean isParametersValid(TimeSeriesParams params) {
         return params.getStockId()!=null && params.getStartDate()!=null
