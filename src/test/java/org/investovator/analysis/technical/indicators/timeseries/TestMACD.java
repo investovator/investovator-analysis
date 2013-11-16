@@ -48,9 +48,9 @@ public class TestMACD extends TestIndicator {
         SimpleDateFormat format = new SimpleDateFormat(OHLC_DATE_FORMAT);
 
         TimeSeriesParams params = new TimeSeriesParams("SAMP", format.parse(staringDate), format.parse(endDate));
-        params.setSlowPeriodAverage(26);
-        params.setQuickPeriodAverage(12);
-        params.setSignalPeriodAverage(9);
+        params.setMACDSlowPeriodAverage(26);
+        params.setMACDQuickPeriodAverage(12);
+        params.setMACDSignalPeriodAverage(9);
 
         TimeSeriesResultSet resultSet = (TimeSeriesResultSet) calculator.calculateValues(IndicatorType.MACD, params);
         assertTrue(resultSet.containsGraph(TimeSeriesGraph.ORIGINAL));

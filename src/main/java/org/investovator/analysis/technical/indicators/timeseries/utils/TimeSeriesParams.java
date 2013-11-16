@@ -85,27 +85,27 @@ public class TimeSeriesParams extends ParamsImpl {
         this.period = period;
     }
 
-    public int getSlowPeriodAverage() {
+    public int getMACDSlowPeriodAverage() {
         return slowPeriodAverage;
     }
 
-    public void setSlowPeriodAverage(int slowPeriodAverage) {
+    public void setMACDSlowPeriodAverage(int slowPeriodAverage) {
         this.slowPeriodAverage = slowPeriodAverage;
     }
 
-    public int getQuickPeriodAverage() {
+    public int getMACDQuickPeriodAverage() {
         return quickPeriodAverage;
     }
 
-    public void setQuickPeriodAverage(int quickPeriodAverage) {
+    public void setMACDQuickPeriodAverage(int quickPeriodAverage) {
         this.quickPeriodAverage = quickPeriodAverage;
     }
 
-    public int getSignalPeriodAverage() {
+    public int getMACDSignalPeriodAverage() {
         return signalPeriodAverage;
     }
 
-    public void setSignalPeriodAverage(int signalPeriodAverage) {
+    public void setMACDSignalPeriodAverage(int signalPeriodAverage) {
         this.signalPeriodAverage = signalPeriodAverage;
     }
 
@@ -117,19 +117,19 @@ public class TimeSeriesParams extends ParamsImpl {
         this.bBandMAType = bBandMAType;
     }
 
-    public double getDevMultiUp() {
+    public double getBBandDevMultiUp() {
         return devMultiUp;
     }
 
-    public void setDevMultiUp(double devMultiUp) {
+    public void setBBandDevMultiUp(double devMultiUp) {
         this.devMultiUp = devMultiUp;
     }
 
-    public double getDevMultiDown() {
+    public double getBBandDevMultiDown() {
         return devMultiDown;
     }
 
-    public void setDevMultiDown(double devMultiDown) {
+    public void setBBandDevMultiDown(double devMultiDown) {
         this.devMultiDown = devMultiDown;
     }
 

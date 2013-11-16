@@ -68,8 +68,8 @@ public class MovingAverageCD extends TimeSeriesIndicator {
 
                 Core core = new Core();
                 RetCode retCode = core.macd(0, (closingPrices.length - 1), closingPrices,
-                        timeSeriesParams.getQuickPeriodAverage(), timeSeriesParams.getSlowPeriodAverage(),
-                        timeSeriesParams.getSignalPeriodAverage(), begin, length, macd, macdSignal, macdHist);
+                        timeSeriesParams.getMACDQuickPeriodAverage(), timeSeriesParams.getMACDSlowPeriodAverage(),
+                        timeSeriesParams.getMACDSignalPeriodAverage(), begin, length, macd, macdSignal, macdHist);
 
                 if(retCode == RetCode.Success){
                     TimeSeriesResultSet resultSet = new TimeSeriesResultSet(timeSeriesParams.getStockId());

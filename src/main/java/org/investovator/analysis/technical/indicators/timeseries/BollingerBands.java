@@ -63,8 +63,8 @@ public class BollingerBands extends TimeSeriesIndicator {
                 MInteger length = new MInteger();
 
                 MAType optInMAType = TimeSeriesParams.BBandMAType.valueToTaLib(timeSeriesParams.getbBandMAType());
-                double inDevUp = timeSeriesParams.getDevMultiUp();
-                double inDevDown = timeSeriesParams.getDevMultiDown();
+                double inDevUp = timeSeriesParams.getBBandDevMultiUp();
+                double inDevDown = timeSeriesParams.getBBandDevMultiDown();
 
                 double[] upperBand= new double[closingPrices.length];
                 double[] middleBand= new double[closingPrices.length];

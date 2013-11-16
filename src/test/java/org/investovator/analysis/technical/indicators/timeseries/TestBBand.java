@@ -49,8 +49,8 @@ public class TestBBand extends TestIndicator {
 
         TimeSeriesParams params = new TimeSeriesParams("SAMP", format.parse(staringDate), format.parse(endDate));
         params.setPeriod(14);
-        params.setDevMultiUp(2.0);
-        params.setDevMultiDown(2.0);
+        params.setBBandDevMultiUp(2.0);
+        params.setBBandDevMultiDown(2.0);
         params.setbBandMAType(TimeSeriesParams.BBandMAType.SMA);
 
         TimeSeriesResultSet resultSet = (TimeSeriesResultSet) calculator.calculateValues(IndicatorType.BBAND, params);
