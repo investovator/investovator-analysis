@@ -29,7 +29,7 @@ public enum TimeSeriesGraph {
     ORIGINAL_HIGH,
     ORIGINAL_LOW,
 
-    /** Average directional index graph*/
+    /** Directional index graph*/
     DX,
 
     /** Average directional index graph*/
