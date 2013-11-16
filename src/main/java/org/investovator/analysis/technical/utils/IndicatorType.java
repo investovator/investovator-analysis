@@ -28,6 +28,9 @@ public enum IndicatorType {
     ADX,
     SMA,
     EMA,
+    DEMA,
+    TEMA,
+    TRIMA,
     KAMA,
     RSI,
     CCI,
@@ -50,6 +53,12 @@ public enum IndicatorType {
                 return TIME_SERIES_INDICATORS + "SimpleMovingAverage";
             case EMA:
                 return TIME_SERIES_INDICATORS + "ExponentialMA";
+            case DEMA:
+                return TIME_SERIES_INDICATORS + "DoubleExponentialMA";
+            case TEMA:
+                return TIME_SERIES_INDICATORS + "TripleExponentialMA";
+            case TRIMA:
+                return TIME_SERIES_INDICATORS + "TriangularMA";
             case RSI:
                 return TIME_SERIES_INDICATORS + "RelativeStrengthIndex";
             case CCI:

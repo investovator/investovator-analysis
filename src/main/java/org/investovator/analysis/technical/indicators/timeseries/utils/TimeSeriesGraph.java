@@ -41,6 +41,15 @@ public enum TimeSeriesGraph {
     /** Exponential moving average graph*/
     EMA,
 
+    /** Double exponential moving average graph*/
+    DEMA,
+
+    /** Triple exponential moving average graph*/
+    TEMA,
+
+    /** Triangular moving average graph*/
+    TRIMA,
+
     /** Kaufman adaptive moving average graph*/
     KAMA,
 
