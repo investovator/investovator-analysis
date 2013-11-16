@@ -36,6 +36,9 @@ public enum TimeSeriesGraph {
     /** Moving average convergence divergence graphs*/
     MACD,
     MACD_SIGNAL,
-    MACD_HIST
+    MACD_HIST,
+
+    /** Relative strength index*/
+    RSI
 
 }

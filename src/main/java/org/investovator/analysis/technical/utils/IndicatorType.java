@@ -26,6 +26,7 @@ public enum IndicatorType {
 
     SMA,
     EMA,
+    RSI,
     MACD;
 
     private static final String TIME_SERIES_INDICATORS
@@ -38,6 +39,8 @@ public enum IndicatorType {
                 return TIME_SERIES_INDICATORS + "SimpleMovingAverage";
             case EMA:
                 return TIME_SERIES_INDICATORS + "ExponentialMA";
+            case RSI:
+                return TIME_SERIES_INDICATORS + "RelativeStrengthIndex";
             case MACD:
                 return TIME_SERIES_INDICATORS + "MovingAverageCD";
         }

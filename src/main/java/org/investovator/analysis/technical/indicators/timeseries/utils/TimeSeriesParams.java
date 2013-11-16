@@ -30,7 +30,7 @@ public class TimeSeriesParams extends ParamsImpl {
 
     private Date startDate;
     private Date endDate;
-    private int periodAverage;
+    private int period;
 
     private int slowPeriodAverage;
     private int quickPeriodAverage;
@@ -41,8 +41,8 @@ public class TimeSeriesParams extends ParamsImpl {
         this.startDate = startDate;
         this.endDate = endDate;
 
-        /*SMA default value*/
-        this.periodAverage = 30;
+        /*period default*/
+        this.period = 14;
 
         /*MACD default values*/
         this.slowPeriodAverage = 26;
@@ -67,12 +67,12 @@ public class TimeSeriesParams extends ParamsImpl {
         this.endDate = endDate;
     }
 
-    public int getPeriodAverage() {
-        return periodAverage;
+    public int getPeriod() {
+        return period;
     }
 
-    public void setPeriodAverage(int periodAverage) {
-        this.periodAverage = periodAverage;
+    public void setPeriod(int period) {
+        this.period = period;
     }
 
     public int getSlowPeriodAverage() {

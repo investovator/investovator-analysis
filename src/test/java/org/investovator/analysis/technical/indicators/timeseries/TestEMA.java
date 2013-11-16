@@ -48,7 +48,7 @@ public class TestEMA extends TestIndicator {
         SimpleDateFormat format = new SimpleDateFormat(OHLC_DATE_FORMAT);
 
         TimeSeriesParams params = new TimeSeriesParams("SAMP", format.parse(staringDate), format.parse(endDate));
-        params.setPeriodAverage(5);
+        params.setPeriod(5);
 
         TimeSeriesResultSet resultSet = (TimeSeriesResultSet) calculator.calculateValues(IndicatorType.EMA, params);
         assertTrue(resultSet.containsGraph(TimeSeriesGraph.ORIGINAL));

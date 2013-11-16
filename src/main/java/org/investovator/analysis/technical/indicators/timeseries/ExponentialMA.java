@@ -63,8 +63,8 @@ public class ExponentialMA extends TimeSeriesIndicator {
                 double[] out = new double[closingPrices.length];
 
                 Core core = new Core();
-                RetCode retCode = core.ema(0, (closingPrices.length - 1), closingPrices,
-                        timeSeriesParams.getPeriodAverage(), begin, length, out);
+                RetCode retCode = core.ema(0, (closingPrices.length - 1), closingPrices, timeSeriesParams.getPeriod(),
+                        begin, length, out);
 
                 if(retCode == RetCode.Success){
                     TimeSeriesResultSet resultSet = new TimeSeriesResultSet(timeSeriesParams.getStockId());

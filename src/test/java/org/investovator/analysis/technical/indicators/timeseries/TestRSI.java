@@ -38,7 +38,7 @@ import static org.junit.Assert.assertTrue;
  * @author rajith
  * @version ${Revision}
  */
-public class TestSMA extends TestIndicator {
+public class TestRSI extends TestIndicator {
 
     @Test
     public void testSMACalculate() throws AnalysisException, ParseException, InvalidParamException {
@@ -48,13 +48,13 @@ public class TestSMA extends TestIndicator {
         SimpleDateFormat format = new SimpleDateFormat(OHLC_DATE_FORMAT);
 
         TimeSeriesParams params = new TimeSeriesParams("SAMP", format.parse(staringDate), format.parse(endDate));
-        params.setPeriod(5);
+        params.setPeriod(14);
 
-        TimeSeriesResultSet resultSet = (TimeSeriesResultSet) calculator.calculateValues(IndicatorType.SMA, params);
+        TimeSeriesResultSet resultSet = (TimeSeriesResultSet) calculator.calculateValues(IndicatorType.RSI, params);
         assertTrue(resultSet.containsGraph(TimeSeriesGraph.ORIGINAL));
-        assertTrue(resultSet.containsGraph(TimeSeriesGraph.SIMPLE_AVERAGE));
+        assertTrue(resultSet.containsGraph(TimeSeriesGraph.RSI));
 
         String randomDate = "2/15/2010";
-        assertEquals((resultSet.getGraph(TimeSeriesGraph.SIMPLE_AVERAGE)).get(format.parse(randomDate)), 218.0);
+        assertEquals((resultSet.getGraph(TimeSeriesGraph.RSI)).get(format.parse(randomDate)), 37.160685883182595);
     }
 }
