@@ -28,6 +28,9 @@ public enum TimeSeriesGraph {
     ORIGINAL,
 
     /** Average directional index graph*/
+    DX,
+
+    /** Average directional index graph*/
     ADX,
 
     /** Simple moving average graph*/
