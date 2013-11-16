@@ -30,6 +30,9 @@ public enum TimeSeriesGraph {
     /** Simple moving average graph*/
     SIMPLE_AVERAGE,
 
+    /** Exponential moving average graph*/
+    EMA,
+
     /** Moving average convergence divergence graphs*/
     MACD,
     MACD_SIGNAL,

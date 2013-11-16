@@ -16,32 +16,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.investovator.analysis.technical.utils;
+package org.investovator.analysis.technical.indicators.timeseries;
+
+import org.investovator.analysis.exceptions.AnalysisException;
+import org.investovator.analysis.exceptions.InvalidParamException;
+import org.investovator.analysis.technical.utils.Params;
+import org.investovator.analysis.technical.utils.ResultsSet;
 
 /**
  * @author rajith
  * @version ${Revision}
  */
-public enum IndicatorType {
+public class RelativeStrengthIndex extends TimeSeriesIndicator {
 
-    SMA,
-    EMA,
-    MACD;
-
-    private static final String TIME_SERIES_INDICATORS
-            = "org.investovator.analysis.technical.indicators.timeseries.";
-
-    public static String getClassName(IndicatorType type){
-
-        switch (type) {
-            case SMA:
-                return TIME_SERIES_INDICATORS + "SimpleMovingAverage";
-            case EMA:
-                return TIME_SERIES_INDICATORS + "ExponentialMA";
-            case MACD:
-                return TIME_SERIES_INDICATORS + "MovingAverageCD";
-        }
-        return null;
-
+    @Override
+    public ResultsSet calculate(Params parameters) throws InvalidParamException, AnalysisException {
+        return null;  //ToDo
     }
 }
