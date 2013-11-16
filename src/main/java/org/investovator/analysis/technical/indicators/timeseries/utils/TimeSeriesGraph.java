@@ -36,6 +36,9 @@ public enum TimeSeriesGraph {
     /** Exponential moving average graph*/
     EMA,
 
+    /** Kaufman adaptive moving average graph*/
+    KAMA,
+
     /** Moving average convergence divergence graphs*/
     MACD,
     MACD_SIGNAL,

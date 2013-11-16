@@ -27,6 +27,7 @@ public enum IndicatorType {
     ADX,
     SMA,
     EMA,
+    KAMA,
     RSI,
     MOM,
     MACD,
@@ -46,6 +47,8 @@ public enum IndicatorType {
                 return TIME_SERIES_INDICATORS + "ExponentialMA";
             case RSI:
                 return TIME_SERIES_INDICATORS + "RelativeStrengthIndex";
+            case KAMA:
+                return TIME_SERIES_INDICATORS + "KaufmanAdaptiveMA";
             case MOM:
                 return TIME_SERIES_INDICATORS + "Momentum";
             case MACD:
