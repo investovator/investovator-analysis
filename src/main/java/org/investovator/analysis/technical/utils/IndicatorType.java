@@ -24,6 +24,7 @@ package org.investovator.analysis.technical.utils;
  */
 public enum IndicatorType {
 
+    AROON,
     DX,
     ADX,
     SMA,
@@ -45,6 +46,8 @@ public enum IndicatorType {
     public static String getClassName(IndicatorType type){
 
         switch (type) {
+            case AROON:
+                return TIME_SERIES_INDICATORS + "Aroon";
             case DX:
                 return TIME_SERIES_INDICATORS + "DirectionalMovIndex";
             case ADX:

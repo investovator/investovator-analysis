@@ -29,6 +29,10 @@ public enum TimeSeriesGraph {
     ORIGINAL_HIGH,
     ORIGINAL_LOW,
 
+    /** Aroon indicator graphs*/
+    AROON_DOWN,
+    AROON_UP,
+
     /** Directional index graph*/
     DX,
 
