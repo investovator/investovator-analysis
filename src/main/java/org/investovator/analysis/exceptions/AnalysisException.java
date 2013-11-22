@@ -18,11 +18,13 @@
 
 package org.investovator.analysis.exceptions;
 
+import org.investovator.core.commons.exceptions.InvestovatorException;
+
 /**
  * @author rajith
  * @version ${Revision}
  */
-public class AnalysisException extends Exception {
+public class AnalysisException extends InvestovatorException {
 
     public AnalysisException(String msg){
         super(msg);

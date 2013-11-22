@@ -18,11 +18,13 @@
 
 package org.investovator.analysis.exceptions;
 
+import org.investovator.core.commons.exceptions.InvestovatorException;
+
 /**
  * @author rajith
  * @version ${Revision}
  */
-public class InvalidParamException extends Exception {
+public class InvalidParamException extends InvestovatorException {
 
     public InvalidParamException(){
         super("Parameters cannot be null");
