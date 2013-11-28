@@ -30,14 +30,14 @@ public class SigGenTSParams implements SigGenParams {
     private int period;
 
     /*for moving averages*/
-    private int slowPeriodAverage;
-    private int quickPeriodAverage;
+    private int slowPeriod;
+    private int quickPeriod;
     private SigGenMAType maType;
 
     public SigGenTSParams(){
         this.period = 14;
-        this.slowPeriodAverage = 26;
-        this.quickPeriodAverage = 12;
+        this.slowPeriod = 26;
+        this.quickPeriod = 12;
         this.maType = SigGenMAType.EMA;
     }
 
@@ -49,20 +49,20 @@ public class SigGenTSParams implements SigGenParams {
         this.period = period;
     }
 
-    public int getSlowPeriodAverage() {
-        return slowPeriodAverage;
+    public int getSlowPeriod() {
+        return slowPeriod;
     }
 
-    public void setSlowPeriodAverage(int slowPeriodAverage) {
-        this.slowPeriodAverage = slowPeriodAverage;
+    public void setSlowPeriod(int slowPeriodAverage) {
+        this.slowPeriod = slowPeriodAverage;
     }
 
-    public int getQuickPeriodAverage() {
-        return quickPeriodAverage;
+    public int getQuickPeriod() {
+        return quickPeriod;
     }
 
-    public void setQuickPeriodAverage(int quickPeriodAverage) {
-        this.quickPeriodAverage = quickPeriodAverage;
+    public void setQuickPeriod(int quickPeriodAverage) {
+        this.quickPeriod = quickPeriodAverage;
     }
 
     public SigGenMAType getMaType() {

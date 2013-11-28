@@ -32,7 +32,7 @@ public enum SigGenMAType {
     DEMA,
     KAMA;
 
-    protected MAType getMAType(SigGenMAType type){
+    protected static MAType getMAType(SigGenMAType type){
         switch (type) {
             case SMA:
                 return MAType.Sma;

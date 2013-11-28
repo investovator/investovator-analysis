@@ -30,10 +30,11 @@ import java.util.HashMap;
 public abstract class SigGenFromTS implements SignalGenerator{
 
     protected SigGenTSParams params;
-    protected HashMap<String, SignalGenerator.StockStatus> currentSecurityStatus;
+    protected HashMap<String, StockStatus> currentSecurityStatus;
 
     public SigGenFromTS(SigGenTSParams params){
-       this.params = params;
+        this.params = params;
+        this.currentSecurityStatus = new HashMap<>();
     }
 
     @Override

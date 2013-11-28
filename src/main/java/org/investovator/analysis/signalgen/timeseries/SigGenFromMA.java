@@ -18,6 +18,11 @@
 
 package org.investovator.analysis.signalgen.timeseries;
 
+import com.tictactec.ta.lib.Core;
+import com.tictactec.ta.lib.MAType;
+import com.tictactec.ta.lib.MInteger;
+import com.tictactec.ta.lib.RetCode;
+import org.investovator.analysis.exceptions.AnalysisException;
 import org.investovator.analysis.signalgen.events.AnalysisEvent;
 import org.investovator.analysis.signalgen.events.MarketClosedEvent;
 import org.investovator.analysis.signalgen.timeseries.utils.SigGenTSParams;
@@ -33,7 +38,7 @@ import java.util.List;
  */
 public class SigGenFromMA extends SigGenFromTS {
 
-    private HashMap<String, List<Number>> closingPrices;
+    private HashMap<String, List<AnalysisEvent>> closingPrices;
     private HashMap<String, Number> currentMAPPO;
 
     public SigGenFromMA(SigGenTSParams params) {
@@ -43,29 +48,72 @@ public class SigGenFromMA extends SigGenFromTS {
     }
 
     @Override
-    public void eventOccurred(AnalysisEvent event) {
+    public void eventOccurred(AnalysisEvent event) throws AnalysisException {
         if(event instanceof MarketClosedEvent){
             addToClosingPrices((MarketClosedEvent) event);
-
+            updateStatus(event.getStockId());
         }
     }
 
-    private Number calculatePPO(){
-        return 0; //TODO
+    private void updateStatus(String stockId) throws AnalysisException {
+        List<AnalysisEvent> prices = closingPrices.get(stockId);
+        if(prices.size() < params.getSlowPeriod()){
+            currentSecurityStatus.put(stockId, StockStatus.NA);
+        } else {
+            double[] priceArray = getDoubleArray(prices);
+            double ppo = (double) calculate(priceArray);
+            if(currentMAPPO.get(stockId) == null){
+                currentSecurityStatus.put(stockId, StockStatus.NA);
+            } else if((currentMAPPO.get(stockId).doubleValue() >= 0) && ppo < -2){
+                currentSecurityStatus.put(stockId, StockStatus.SELL);
+            } else if ((currentMAPPO.get(stockId).doubleValue() <= 0) && ppo > 2){
+                currentSecurityStatus.put(stockId, StockStatus.BUY);
+            } else {
+                currentSecurityStatus.put(stockId, StockStatus.DO_NOTHING);
+            }
+            currentMAPPO.put(stockId, ppo);
+        }
+    }
+
+    private double[] getDoubleArray(List<AnalysisEvent> prices) {
+        double[] priceInDb = new double[prices.size()];
+
+        for(int i = 0; i < prices.size(); i++){
+            priceInDb[i] = ((MarketClosedEvent)prices.get(i)).getClosePrice();
+        }
+        return priceInDb;
+    }
+
+    private Number calculate(double [] prices) throws AnalysisException {
+        Core core = new Core();
+        MInteger begin = new MInteger();
+        MInteger length = new MInteger();
+        double[] out = new double[prices.length];
+        MAType type = SigGenMAType.getMAType(params.getMaType());
+
+        RetCode retCode = core.ppo(0, (prices.length - 1), prices, params.getQuickPeriod(),
+                params.getSlowPeriod(), type, begin, length, out);
+
+        if(retCode == RetCode.Success){
+            return out[0];
+        }  else {
+            throw new AnalysisException(retCode.toString());
+        }
     }
 
     private void addToClosingPrices(MarketClosedEvent event) {
         String stockId = event.getStockId();
         if(!closingPrices.containsKey(stockId)){
-            List<Number> prices = new ArrayList<>();
-            prices.add(event.getClosePrice());
+            List<AnalysisEvent> prices = new ArrayList<>();
+            prices.add(event);
             closingPrices.put(stockId, prices);
         } else {
-            List<Number> prices = closingPrices.get(stockId);
+            List<AnalysisEvent> prices = closingPrices.get(stockId);
+            prices.add(event);
             Collections.sort(prices, Collections.reverseOrder());
 
-            if(prices.size() > params.getSlowPeriodAverage() - 1){
-                closingPrices.put(stockId, prices.subList(0, (params.getSlowPeriodAverage() - 1)));
+            if(prices.size() > params.getSlowPeriod() - 1){
+                closingPrices.put(stockId, prices.subList(0, (params.getSlowPeriod())));
             } else
                 closingPrices.put(stockId, prices);
         }

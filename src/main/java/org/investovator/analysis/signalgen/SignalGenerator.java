@@ -18,6 +18,7 @@
 
 package org.investovator.analysis.signalgen;
 
+import org.investovator.analysis.exceptions.AnalysisException;
 import org.investovator.analysis.signalgen.events.AnalysisEvent;
 
 import java.util.EventListener;
@@ -35,7 +36,7 @@ public interface SignalGenerator extends EventListener {
         SELL
     }
 
-    public void eventOccurred(AnalysisEvent event);
+    public void eventOccurred(AnalysisEvent event) throws AnalysisException;
 
     public StockStatus getCurrentStatus(String stockId);
 }

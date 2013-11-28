@@ -18,17 +18,18 @@
 
 package org.investovator.analysis.signalgen;
 
+import org.investovator.analysis.signalgen.timeseries.SigGenFromMA;
+import org.investovator.analysis.signalgen.timeseries.utils.SigGenTSParams;
 import org.investovator.analysis.signalgen.utils.SigGenParams;
 
 /**
  * @author rajith
  * @version ${Revision}
  */
-public class TimeSeriesSignalGenFactory implements SignalGeneratorFactory {
-
+public class MASignalGenFactory implements SignalGeneratorFactory {
 
     @Override
     public SignalGenerator createGenerator(SigGenParams params) {
-        return null;  //ToDo
+        return new SigGenFromMA((SigGenTSParams) params);
     }
 }
