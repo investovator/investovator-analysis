@@ -18,11 +18,13 @@
 
 package org.investovator.analysis.signalgen;
 
+import org.investovator.analysis.signalgen.utils.SigGenParams;
+
 /**
  * @author rajith
  * @version ${Revision}
  */
 public interface SignalGeneratorFactory {
 
-    public SignalGenerator createGenerator();
+    public SignalGenerator createGenerator(SigGenParams params);
 }

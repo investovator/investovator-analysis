@@ -16,18 +16,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.investovator.analysis.signalgen.events;
+package org.investovator.analysis.signalgen.timeseries;
 
-import java.util.Date;
+import org.investovator.analysis.signalgen.SignalGenerator;
+import org.investovator.analysis.signalgen.timeseries.utils.SigGenTSParams;
+
+import java.util.HashMap;
 
 /**
  * @author rajith
  * @version ${Revision}
  */
-public interface AnalysisEvent extends Comparable<AnalysisEvent> {
+public abstract class SigGenFromTS implements SignalGenerator{
 
-    public String getStockId();
+    protected SigGenTSParams params;
+    protected HashMap<String, SignalGenerator.StockStatus> currentSecurityStatus;
 
-    public Date getTime();
+    public SigGenFromTS(SigGenTSParams params){
+       this.params = params;
+    }
 
+    @Override
+    public StockStatus getCurrentStatus(String stockId) {
+        return currentSecurityStatus.get(stockId);
+    }
 }

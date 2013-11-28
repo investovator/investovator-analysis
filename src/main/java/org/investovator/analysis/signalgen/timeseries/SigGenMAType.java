@@ -16,27 +16,38 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.investovator.analysis.signalgen.timeseriesgens;
+package org.investovator.analysis.signalgen.timeseries;
 
-import org.investovator.analysis.signalgen.SignalGenerator;
-import org.investovator.analysis.signalgen.events.AnalysisEvent;
-import org.investovator.analysis.signalgen.events.MarketClosedEvent;
+import com.tictactec.ta.lib.MAType;
 
 /**
  * @author rajith
  * @version ${Revision}
  */
-public class SigGenFromSMA implements SignalGenerator {
+public enum SigGenMAType {
+    SMA,
+    EMA,
+    TEMA,
+    TRIMA,
+    DEMA,
+    KAMA;
 
-    @Override
-    public void eventOccurred(AnalysisEvent event) {
-        if(event instanceof MarketClosedEvent){
-           //ToDo
+    protected MAType getMAType(SigGenMAType type){
+        switch (type) {
+            case SMA:
+                return MAType.Sma;
+            case EMA:
+                return MAType.Ema;
+            case DEMA:
+                return MAType.Tema;
+            case TEMA:
+                return MAType.Trima;
+            case TRIMA:
+                return MAType.Dema;
+            case KAMA:
+                return MAType.Kama;
         }
+        return null;
     }
 
-    @Override
-    public StockStatus getCurrentStatus(String stockId) {
-        return null;  //ToDo
-    }
 }

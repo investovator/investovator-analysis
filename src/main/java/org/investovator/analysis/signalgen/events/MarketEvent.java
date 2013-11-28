@@ -50,4 +50,9 @@ public abstract class MarketEvent implements AnalysisEvent {
     public Date getTime(){
         return timestamp;
     }
+
+    @Override
+    public int compareTo(AnalysisEvent event) {
+        return this.getTime().compareTo(event.getTime());
+    }
 }

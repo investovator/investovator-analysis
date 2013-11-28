@@ -16,18 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.investovator.analysis.signalgen.events;
-
-import java.util.Date;
+package org.investovator.analysis.signalgen.utils;
 
 /**
  * @author rajith
  * @version ${Revision}
  */
-public interface AnalysisEvent extends Comparable<AnalysisEvent> {
-
-    public String getStockId();
-
-    public Date getTime();
-
+public interface SigGenParams {
 }
