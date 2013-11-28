@@ -40,16 +40,18 @@ public class SigGenFromMA extends SigGenFromTS {
 
     private HashMap<String, List<AnalysisEvent>> closingPrices;
     private HashMap<String, Number> currentMAPPO;
+    private boolean initEventsAvailable;
 
     public SigGenFromMA(SigGenTSParams params) {
         super(params);
-        this.closingPrices = new HashMap<>();
+        initClosingPrices(params);
         this.currentMAPPO = new HashMap<>();
     }
 
     @Override
     public void eventOccurred(AnalysisEvent event) throws AnalysisException {
         if(event instanceof MarketClosedEvent){
+            initEventCalculation();
             addToClosingPrices((MarketClosedEvent) event);
             updateStatus(event.getStockId());
         }
@@ -116,6 +118,25 @@ public class SigGenFromMA extends SigGenFromTS {
                 closingPrices.put(stockId, prices.subList(0, (params.getSlowPeriod())));
             } else
                 closingPrices.put(stockId, prices);
+        }
+    }
+
+    private void initClosingPrices(SigGenTSParams params) {
+        if(params.getMarketEvents() != null){
+            this.closingPrices = params.getMarketEvents();
+            this.initEventsAvailable = true;
+        } else {
+            this.closingPrices = new HashMap<>();
+            this.initEventsAvailable = false;
+        }
+    }
+
+    private void initEventCalculation() throws AnalysisException {
+        if(initEventsAvailable){
+            for(String stockId : closingPrices.keySet()){
+                currentMAPPO.put(stockId, calculate(getDoubleArray(closingPrices.get(stockId))));
+            }
+            initEventsAvailable = false;
         }
     }
 }
