@@ -35,6 +35,9 @@ import java.util.List;
 /**
  * @author rajith
  * @version ${Revision}
+ *
+ * Percentage Price Oscillation has been used generate signals
+ * and 2% error tolerance margin is added to address the damping factor.
  */
 public class SigGenFromMA extends SigGenFromTS {
 
