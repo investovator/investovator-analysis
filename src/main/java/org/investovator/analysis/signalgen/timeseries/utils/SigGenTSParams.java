@@ -90,10 +90,11 @@ public class SigGenTSParams implements SigGenParams {
            marketEvents = new HashMap<>();
         }
 
-        if(slowPeriod != marketEventSet.size()){
+        if(slowPeriod > marketEventSet.size()){
             throw new InvalidParamException("size mismatch");
         } else {
             Collections.sort(marketEventSet, Collections.reverseOrder());
+            marketEventSet=marketEventSet.subList(0,slowPeriod);
             this.marketEvents.put(stockId, marketEventSet);
         }
     }
