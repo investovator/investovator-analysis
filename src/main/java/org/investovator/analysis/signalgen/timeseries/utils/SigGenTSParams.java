@@ -18,7 +18,6 @@
 
 package org.investovator.analysis.signalgen.timeseries.utils;
 
-import org.investovator.analysis.exceptions.InvalidParamException;
 import org.investovator.analysis.signalgen.events.AnalysisEvent;
 import org.investovator.analysis.signalgen.timeseries.SigGenMAType;
 import org.investovator.analysis.signalgen.utils.SigGenParams;
@@ -84,18 +83,13 @@ public class SigGenTSParams implements SigGenParams {
         return marketEvents;
     }
 
-    public void setMarketEvents(String stockId, List<AnalysisEvent> marketEventSet)
-            throws InvalidParamException {
+    public void setMarketEvents(String stockId, List<AnalysisEvent> marketEventSet) {
         if(marketEvents == null){
            marketEvents = new HashMap<>();
         }
 
-//        if(slowPeriod != marketEventSet.size()){
-//            throw new InvalidParamException("size mismatch");
-//        } else {
-            Collections.sort(marketEventSet, Collections.reverseOrder());
-            marketEventSet=marketEventSet.subList(0,slowPeriod);
-            this.marketEvents.put(stockId, marketEventSet);
-//        }
+        Collections.sort(marketEventSet, Collections.reverseOrder());
+        marketEventSet = marketEventSet.subList(0, slowPeriod);
+        this.marketEvents.put(stockId, marketEventSet);
     }
 }
