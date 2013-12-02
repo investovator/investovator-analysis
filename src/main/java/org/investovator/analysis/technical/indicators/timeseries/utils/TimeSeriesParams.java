@@ -43,8 +43,8 @@ public class TimeSeriesParams extends ParamsImpl {
 
     public TimeSeriesParams (String stockId, Date startDate, Date endDate){
         super(stockId);
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startDate = (Date) startDate.clone();
+        this.endDate = (Date) endDate.clone();
 
         /*period default*/
         this.period = 14;
@@ -62,19 +62,19 @@ public class TimeSeriesParams extends ParamsImpl {
 
 
     public Date getStartDate() {
-        return startDate;
+        return (Date) startDate.clone();
     }
 
     public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+        this.startDate = (Date) startDate.clone();
     }
 
     public Date getEndDate() {
-        return endDate;
+        return (Date) endDate.clone();
     }
 
     public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+        this.endDate = (Date) endDate.clone();
     }
 
     public int getPeriod() {

@@ -37,7 +37,7 @@ public abstract class MarketEvent implements AnalysisEvent {
     protected String stockId;
 
     public MarketEvent(String stockId, Date time){
-        this.timestamp = time;
+        this.timestamp = (Date) time.clone();
         this.stockId = stockId;
     }
 
@@ -48,7 +48,7 @@ public abstract class MarketEvent implements AnalysisEvent {
 
     @Override
     public Date getTime(){
-        return timestamp;
+        return (Date) timestamp.clone();
     }
 
     @Override
